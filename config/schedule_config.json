@@ -1,0 +1,22 @@
+[
+  {
+    "topic": "EC2",
+    "days": 3,
+    "subtopics": ["Right Sizing", "Instance Scheduling", "Spot Instances"]
+  },
+  {
+    "topic": "S3",
+    "days": 5,
+    "subtopics": ["Lifecycle Policies", "Intelligent Tiering", "S3 Storage Classes", "Data Transfer Optimization", "Unused Buckets Cleanup"]
+  },
+  {
+    "topic": "Lambda",
+    "days": 4,
+    "subtopics": ["Memory Tuning", "Cold Start Optimization", "Function Timeouts", "Concurrency Control"]
+  },
+  {
+    "topic": "RDS",
+    "days": 3,
+    "subtopics": ["Instance Sizing", "Storage Optimization", "Read Replica Usage"]
+  }
+]

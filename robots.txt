@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://srikanthrupireddyai.github.io/aws-cost-optimization-journey/sitemap.xml

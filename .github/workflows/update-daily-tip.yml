@@ -1,0 +1,37 @@
+name: Daily AWS Cost Tip Agent
+
+on:
+  schedule:
+    - cron: '50 23 * * *'  # 5:20 AM IST daily
+  workflow_dispatch:
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install python-dotenv requests
+
+      - name: Run cost tip agent
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python main.py
+
+      - name: Commit and push daily tip
+        run: |
+          git config --global user.email "srikanth.rupireddy.ai@gmail.com"
+          git config --global user.name "Srikanth Rupireddy"
+          git add daily-tips/*.md
+          git commit -m "📅 Daily AWS Cost Tip - $(date '+%Y-%m-%d')" || echo "No changes to commit"
+          git push

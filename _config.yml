@@ -1,0 +1,11 @@
+title: "AWS Cost Optimization Journey"
+description: "Daily cost-saving tips, use cases, and learning logs by Srikanth Rupireddy"
+baseurl: "/aws-cost-optimization-journey"
+url: "https://srikanthrupireddyai.github.io"
+theme: minima
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+google_analytics: ""  # Optional: Add your tracking ID
