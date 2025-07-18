@@ -1,11 +1,11 @@
 # utils/content_generator.py
 import os
-import openai
+from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+api_key = os.getenv("OPENAI_API_KEY")
 
 SYSTEM_PROMPT = "You are an AWS cost optimization expert who provides one valuable, practical, and concise tip per subtopic."
 
@@ -14,8 +14,8 @@ def generate_tip_for_topic(topic: str, subtopic: str) -> str:
         f"Give a short, real-world AWS cost optimization tip focused on the topic: {topic} and subtopic: {subtopic}. "
         f"Limit it to under 120 words, and make it practical."
     )
-
-    response = openai.ChatCompletion.create(
+    client = OpenAI(api_key={{api_key}})
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -24,7 +24,7 @@ def generate_tip_for_topic(topic: str, subtopic: str) -> str:
         temperature=0.7,
         max_tokens=150
     )
-    
+
     tip = response.choices[0].message.content.strip()
     return f"💡 *AWS Cost Optimization Tip* for *{topic} → {subtopic}*:\n\n{tip}"
 
