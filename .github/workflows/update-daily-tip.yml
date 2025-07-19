@@ -32,6 +32,7 @@ jobs:
         run: |
           git config --global user.email "srikanth.rupireddy.ai@gmail.com"
           git config --global user.name "Srikanth Rupireddy"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_ACCESS_TOKEN }}@github.com/srikanthrupireddyai/aws-cost-optimization-journey.git
           git add daily-tips/*.md
           git commit -m "📅 Daily AWS Cost Tip - $(date '+%Y-%m-%d')" || echo "No changes to commit"
           git push
