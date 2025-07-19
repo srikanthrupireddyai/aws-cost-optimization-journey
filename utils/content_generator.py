@@ -5,8 +5,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-api_key = os.getenv("OPENAI_API_KEY")
-
 SYSTEM_PROMPT = "You are an AWS cost optimization expert who provides one valuable, practical, and concise tip per subtopic."
 
 def generate_tip_for_topic(topic: str, subtopic: str) -> str:
@@ -14,7 +12,7 @@ def generate_tip_for_topic(topic: str, subtopic: str) -> str:
         f"Give a short, real-world AWS cost optimization tip focused on the topic: {topic} and subtopic: {subtopic}. "
         f"Limit it to under 120 words, and make it practical."
     )
-    client = OpenAI(api_key)
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[
