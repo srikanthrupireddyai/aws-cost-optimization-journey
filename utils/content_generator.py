@@ -17,9 +17,8 @@ def generate_tip_for_topic(topic: str, subtopic: str) -> str:
         "1.  **Introduction**: Briefly explain the subtopic and why it's important for cost optimization.\n"
         "2.  **Deep Dive**: Provide a detailed explanation of the concepts. Cover the 'why' and 'how'. Use examples where possible.\n"
         "3.  **Implementation Steps**: Give a clear, step-by-step guide on how to apply the optimization. Include AWS Management Console steps, CLI commands, or Infrastructure as Code (e.g., CloudFormation, Terraform) snippets where relevant.\n"
-        "4.  **Best Practices & Pitfalls**: List key best practices to follow and common pitfalls to avoid.\n"
-        "5. Include **real-world mistakes** or misconfigurations that often lead to higher costs (e.g., leaving unused EBS volumes, misconfigured auto-scaling, or not using Savings Plans).\n"
-        "6.  **Hands-on Assignment**: Create a practical, hands-on assignment that allows me to apply what I've learned in my own AWS account. The assignment should have clear objectives.\n\n"
+        "4.  **Best Practices, Pitfalls & Real-World Examples**: List key best practices to follow, common pitfalls to avoid, and include examples of real-world mistakes or misconfigurations that lead to higher costs (e.g., leaving unused EBS volumes, misconfigured auto-scaling, or not using Savings Plans).\n"
+        "5.  **Hands-on Assignment**: Create a practical, hands-on assignment that allows me to apply what I've learned in my own AWS account. The assignment should have clear objectives.\n\n"
         "Ensure the entire output is well-formatted in Markdown, easy to read, and provides deep, practical value. Do not include a main title in your response; start directly with the 'Introduction' section."
     )
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))

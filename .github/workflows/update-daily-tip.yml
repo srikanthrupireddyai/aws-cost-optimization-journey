@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -28,15 +26,20 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
         run: python agent.py
 
-      - name: Commit and push daily tip
+      - name: Commit and push changes
         run: |
           git config --global user.email "srikanth.rupireddy.ai@gmail.com"
-          git config --global user.name "Srikanth Rupireddy"
-          git branch --show-current
-          git remote set-url origin https://x-access-token:${{ secrets.GH_ACCESS_TOKEN }}@github.com/srikanthrupireddyai/aws-cost-optimization-journey.git
-          git remote -v
-          git add daily-tips/*.md
-          git commit -m "📅 Daily AWS Cost Tip - $(date '+%Y-%m-%d')" || echo "No changes to commit"
-          git push origin master
+          git config --global user.name "Srikanth Rupireddy (AI Agent)"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_ACCESS_TOKEN }}@github.com/${{ github.repository }}
+
+          # Add both the new tip and the updated tracker file
+          git add daily-tips/*.md config/run_tracker.json
+
+          # Commit and push only if there are changes
+          if ! git diff --staged --quiet; then
+            git commit -m "📅 Daily AWS Cost Tip - $(date '+%Y-%m-%d')"
+            git push origin HEAD:${{ github.ref_name }}
+          fi

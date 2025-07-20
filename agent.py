@@ -28,7 +28,20 @@ def post_to_slack(message: str, webhook_url: str):
         print("⚠️ SLACK_WEBHOOK_URL not set. Skipping post to Slack.")
         return
 
-    payload = {"text": message}
+    # Use Slack's Block Kit for better formatting control
+    payload = {
+        "blocks": [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": message
+                }
+            }
+        ],
+        "text": message  # Fallback for notifications and older clients
+    }
+
     try:
         response = requests.post(webhook_url, json=payload)
         response.raise_for_status()  # Raises HTTPError for bad responses (4xx or 5xx)
