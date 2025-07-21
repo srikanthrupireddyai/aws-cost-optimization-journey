@@ -8,6 +8,8 @@ on:
 jobs:
   run-agent:
     runs-on: ubuntu-latest
+    env:
+      TZ: 'Asia/Kolkata'
 
     steps:
       - name: Checkout code
